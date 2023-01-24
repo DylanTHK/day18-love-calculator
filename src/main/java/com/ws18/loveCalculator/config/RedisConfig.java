@@ -9,8 +9,7 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-
-import redis.clients.jedis.JedisClientConfig;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 public class RedisConfig {
 
@@ -29,7 +28,7 @@ public class RedisConfig {
     
     @Bean
     @Scope("singleton")
-    public RedisTemplate<String, Object> redisTemplate() {
+    public RedisTemplate<String, String> redisTemplate() {
         
         final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
         config.setHostName(redisHost);
@@ -47,10 +46,13 @@ public class RedisConfig {
         final JedisConnectionFactory jedisFac = new JedisConnectionFactory(config, jedisClient);
         jedisFac.afterPropertiesSet();
 
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
+        // setting redis template data structure
+        RedisTemplate<String, String> redisTemplate = new RedisTemplate<String, String>();
         redisTemplate.setConnectionFactory(jedisFac);
 
-        // Need to add serializer?
+        // Adding serializer for redis template input
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new StringRedisSerializer());
 
         return redisTemplate;
     }

@@ -38,6 +38,9 @@ public class LoveController {
         // model.addAttribute("couple", couple);
         return "result";
     }
+
+    // GET Mapping for listing all contacts (in table)
     
-    
+
+    // 
 }

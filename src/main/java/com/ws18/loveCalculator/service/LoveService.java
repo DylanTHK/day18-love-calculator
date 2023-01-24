@@ -20,6 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.ws18.loveCalculator.model.LoveCouple;
 
+// helper class to generate request / response entities
 @Service
 public class LoveService {
     
@@ -34,6 +35,7 @@ public class LoveService {
         ListOfCouples.add(couple);
     }
 
+    // method to take in json, create entity and
     public LoveCouple getRequestEntity(String sname, String fname) throws IOException, InterruptedException {
         
         // GOAL: to get "https://love-calculator.p.rapidapi.com/getPercentage?sname=Alice&fname=John"
@@ -44,14 +46,14 @@ public class LoveService {
         // build the url
         url = UriComponentsBuilder
             .fromUriString(url)
-            .queryParam("sname", sname)
             .queryParam("fname", fname)
+            .queryParam("sname", sname)
             .toUriString();
 
         System.out.println("URL new: " + url);
 
     
-        // Set the headers you need to send to API
+        // Set the headers required for API request
         final HttpHeaders headers = new HttpHeaders();
         headers.set("X-RapidAPI-Key", "431350f947msh1d9b2c145f95c1cp115117jsneee91761942a");
         headers.set("X-RapidAPI-Host", "love-calculator.p.rapidapi.com");
@@ -66,24 +68,12 @@ public class LoveService {
             HttpMethod.GET, entity, 
             String.class);
 
-        // TODO
         System.out.println("Response Body: " + response.getBody().getClass());
 
         // convert response body(String) to Couple object
         LoveCouple couple = new LoveCouple(response.getBody());
 
         return couple;
-        // method to get percentage from api
-        // HttpRequest request = HttpRequest.newBuilder()
-        //     .uri(URI.create(url))
-        //     .header("X-RapidAPI-Key", "431350f947msh1d9b2c145f95c1cp115117jsneee91761942a")
-        //     .header("X-RapidAPI-Host", "love-calculator.p.rapidapi.com")
-        //     .method("GET", HttpRequest.BodyPublishers.noBody())
-        //     .build();
-        // System.out.println("HTTP Request: " + request);
-        // HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        // System.out.println("Response Body: " + response);
-
-    }    
+    }
 
 }
