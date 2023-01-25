@@ -1,6 +1,7 @@
 package com.ws18.loveCalculator.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,7 +45,12 @@ public class LoveController {
 
     // GET Mapping for listing all contacts (in table)
     @GetMapping(path="/list")
-    public String getAllResults() {
+    public String getAllResults(Model model) throws IOException {
+        // call method to extract data and return ARRAY of objects
+        List<LoveCouple> coupleList = loveRedis.getAllResults();
+
+        // add objects to model
+        model.addAttribute("coupleList", coupleList);
 
         return "allResults";
     }

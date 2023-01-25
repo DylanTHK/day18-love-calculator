@@ -4,11 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table, th, td {
+            border: 1px solid;
+}
+    </style>
     <title>Document</title>
 </head>
 <body>
     <h1>ALL RESULTS</h1>
-    
+    <table >
+        <tr>
+            <th>Fname</th>
+            <th>heart</th>
+            <th>Sname</th>
+            <th>Percentage</th>
+            <th>Results</th>
+        </tr>
+        <!-- add thymeleaf template here -->
+        <tr data-th-each="couple : ${coupleList}">
+            <td data-th-text="${couple.fname}"></td>
+            <td data-th-text="${couple.sname}"></td>
+            <td>heart</td>
+            <td data-th-text="${couple.percentage}"></td>
+            <td data-th-text="${couple.result}"></td>
+    </table>
     
 </body>
 </html>
