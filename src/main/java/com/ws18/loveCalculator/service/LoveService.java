@@ -1,18 +1,12 @@
 package com.ws18.loveCalculator.service;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -23,24 +17,17 @@ import com.ws18.loveCalculator.model.LoveCouple;
 // helper class to generate request / response entities
 @Service
 public class LoveService {
-    
-    // list to store couple objects
-    List<LoveCouple> ListOfCouples = new ArrayList<LoveCouple>();
 
-    public List<LoveCouple> getListOfCouples() {
-        return ListOfCouples;
-    }
-
-    public void addCouple(LoveCouple couple) {
-        ListOfCouples.add(couple);
-    }
+    @Autowired
+    LoveRedis loveRedis;
 
     // method to take in json, create entity and
-    public LoveCouple getRequestEntity(String sname, String fname) throws IOException, InterruptedException {
+    public String getRequestEntity(String sname, String fname) throws IOException, InterruptedException {
         
         // GOAL: to get "https://love-calculator.p.rapidapi.com/getPercentage?sname=Alice&fname=John"
         // base URL
         String url = "https://love-calculator.p.rapidapi.com/getPercentage?";
+        System.out.println("Printing from LoveService.java");
         System.out.println("URL old: " + url);
 
         // build the url
@@ -71,9 +58,9 @@ public class LoveService {
         System.out.println("Response Body: " + response.getBody().getClass());
 
         // convert response body(String) to Couple object
-        LoveCouple couple = new LoveCouple(response.getBody());
+        String coupleJson = response.getBody();
 
-        return couple;
+        return coupleJson;
     }
 
 }

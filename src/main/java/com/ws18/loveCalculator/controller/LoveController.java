@@ -10,37 +10,43 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ws18.loveCalculator.model.LoveCouple;
+import com.ws18.loveCalculator.service.LoveRedis;
 import com.ws18.loveCalculator.service.LoveService;
 
 
 @Controller
-@RequestMapping(path = "/loveCalculator")
+@RequestMapping(path = "/lovecalc")
 public class LoveController {
 
     @Autowired
     LoveService loveSvc;
 
+    @Autowired
+    LoveRedis loveRedis;
+
     // activated when get url with /loveCalculator
     @GetMapping
     public String getMethodName(@RequestParam String name1,
-        @RequestParam String name2,
-        Model model) throws IOException, InterruptedException {
+                                @RequestParam String name2, 
+                                Model model) 
+                                throws IOException, InterruptedException {
 
-        // send in 2 names, returns an object
-        LoveCouple lc = loveSvc.getRequestEntity(name1, name2);
-
-        // add lc to array in loveSvc
-        loveSvc.addCouple(lc);
-
+        // method generates request entity and returns json string
+        String coupleJson = loveSvc.getRequestEntity(name1, name2);
+        loveRedis.save(coupleJson);
+        
         // add couple object to model
-        model.addAttribute("couple", lc);
-
+        LoveCouple coupleObj = new LoveCouple(coupleJson);
+        model.addAttribute("couple", coupleObj);
         // model.addAttribute("couple", couple);
         return "result";
     }
 
     // GET Mapping for listing all contacts (in table)
-    
+    @GetMapping(path="/list")
+    public String getAllResults() {
 
-    // 
+        return "allResults";
+    }
+
 }
