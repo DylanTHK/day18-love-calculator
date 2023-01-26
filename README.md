@@ -1,18 +1,16 @@
 ## API Practice: Love Calculator
 
-API Link: https://rapidapi.com/ajith/api/love-calculator
+To create an app to make an API call to loveCalculator and display the results
 
-Take 2 inputs name1 & name2
+FLOW
+1. add first name
+2. add second name
+3. click generate
+4. results shown on new page
 
-Calculate and return json
-
-store json in redis database
-
-LoveCalculator API key (Macos)
-```
-export LOVE_CALCULATOR_KEY=<your api key>
-```
 
 Obtain api keys from: https://rapidapi.com/ajith/api/love-calculator
+
+Railway Deployment
 X-RapidAPI-Key: 431350f947msh1d9b2c145f95c1cp115117jsneee91761942a
 X-RapidAPI-Host: love-calculator.p.rapidapi.com

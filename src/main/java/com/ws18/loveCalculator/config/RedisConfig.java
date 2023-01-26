@@ -37,6 +37,7 @@ public class RedisConfig {
         System.out.println("Redis Port: " + redisPort);
         System.out.println("Redis User: " + redisUsername);
         System.out.println("Redis Password: " + redisPassword);
+        
         final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
         config.setHostName(redisHost);
         config.setPort(redisPort.get()); // .get() to access value in optional
