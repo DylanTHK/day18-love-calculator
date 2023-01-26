@@ -33,6 +33,10 @@ public class RedisConfig {
     @Scope("singleton")
     public RedisTemplate<String, Object> redisTemplate() { // seems like public not required for bean method
 
+        System.out.println("Redis Host: " + redisHost);
+        System.out.println("Redis Port: " + redisPort);
+        System.out.println("Redis User: " + redisUsername);
+        System.out.println("Redis Password: " + redisPassword);
         final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
         config.setHostName(redisHost);
         config.setPort(redisPort.get()); // .get() to access value in optional
