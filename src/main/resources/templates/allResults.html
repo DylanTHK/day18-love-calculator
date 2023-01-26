@@ -24,8 +24,8 @@
         <!-- add thymeleaf template here -->
         <tr data-th-each="couple : ${coupleList}">
             <td data-th-text="${couple.fname}"></td>
-            <td data-th-text="${couple.sname}"></td>
             <td>heart</td>
+            <td data-th-text="${couple.sname}"></td>
             <td data-th-text="${couple.percentage}"></td>
             <td data-th-text="${couple.result}"></td>
     </table>

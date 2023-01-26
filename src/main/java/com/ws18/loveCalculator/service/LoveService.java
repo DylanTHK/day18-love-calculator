@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.ws18.loveCalculator.model.LoveCouple;
-
 // helper class to generate request / response entities
 @Service
 public class LoveService {
@@ -22,10 +20,10 @@ public class LoveService {
     LoveRedis loveRedis;
 
     // method to take in json, create entity and
-    public String getRequestEntity(String sname, String fname) throws IOException, InterruptedException {
+    public String getRequestEntity(String fname, String sname) throws IOException, InterruptedException {
         
         // GOAL: to get "https://love-calculator.p.rapidapi.com/getPercentage?sname=Alice&fname=John"
-        // base URL
+        // base URL (using requested params fname, sname)
         String url = "https://love-calculator.p.rapidapi.com/getPercentage?";
         System.out.println("Printing from LoveService.java");
         System.out.println("URL old: " + url);

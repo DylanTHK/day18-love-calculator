@@ -27,13 +27,13 @@ public class LoveController {
 
     // activated when get url with /loveCalculator
     @GetMapping
-    public String getMethodName(@RequestParam String name1,
-                                @RequestParam String name2, 
+    public String getMethodName(@RequestParam String fname,
+                                @RequestParam String sname, 
                                 Model model) 
                                 throws IOException, InterruptedException {
 
         // method generates request entity and returns json string
-        String coupleJson = loveSvc.getRequestEntity(name1, name2);
+        String coupleJson = loveSvc.getRequestEntity(fname, sname);
         loveRedis.save(coupleJson);
         
         // add couple object to model

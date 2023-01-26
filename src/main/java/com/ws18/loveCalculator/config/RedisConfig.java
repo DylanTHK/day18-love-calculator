@@ -18,10 +18,13 @@ public class RedisConfig {
     // value redis port from appln.properties
     @Value("${spring.data.redis.host}")
     private String redisHost;
+
     @Value("${spring.data.redis.port}")
     private Optional<Integer> redisPort;
+
     @Value("${spring.data.redis.username}")
     private String redisUsername;
+    
     @Value("${spring.data.redis.password}")
     private String redisPassword;
 

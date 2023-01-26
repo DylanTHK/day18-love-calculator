@@ -17,10 +17,7 @@ public class LoveCouple {
     private String result;
 
 
-    // public LoveCouple() {
-
-    // }
-
+    // contructors for LoveCouple
     public LoveCouple(String json) throws IOException {
         updateCouple(json);
     }

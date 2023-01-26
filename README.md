@@ -19,6 +19,7 @@ X-RapidAPI-Host: love-calculator.p.rapidapi.com
 
 TODO 25/1/2023
 1. extract info from redis (LoveRedis)
+    - convert json string to object
 2. return array to controller
 3. use thymeleaf with for each loop in html
 4. display all results (fname <3 sname <percentage> <results>)

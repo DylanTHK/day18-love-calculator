@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.ws18.loveCalculator.model.LoveCouple;
 
-// class to interact with redis database
+// class to interact with redis database (add, update, read)
 @Service
 public class LoveRedis {
     
